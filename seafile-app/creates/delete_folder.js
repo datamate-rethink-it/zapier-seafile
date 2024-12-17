@@ -7,12 +7,9 @@ const perform = async (z, bundle) => {
   }
 
   const response = await z.request({
-    method: "POST",
+    method: "DELETE",
     url: `${bundle.authData.serverUrl}/api2/repos/${bundle.inputData.repo}/dir/?p=${bundle.inputData.path}`,
-    form: {
-      operation: "mkdir",
-      create_parents: true,
-    },
+    form: {},
     json: true,
   });
 
@@ -34,12 +31,12 @@ const perform = async (z, bundle) => {
 module.exports = {
   // see here for a full list of available properties:
   // https://github.com/zapier/zapier-platform/blob/main/packages/schema/docs/build/schema.md#createschema
-  key: "create_folder",
-  noun: "Create Folder",
+  key: "delete_folder",
+  noun: "Delete Folder",
 
   display: {
-    label: "Create Folder",
-    description: "Creates a new folder at the path you specify.",
+    label: "Delete Folder",
+    description: "Delete a new folder in a library and move it to trash.",
   },
 
   operation: {
@@ -64,7 +61,7 @@ module.exports = {
         type: "string",
         placeholder: "/invoices/2024",
         helpText:
-          "Missing parent folders will be automatically created if needed when specifying a longer path.",
+          "The folder, along with all files and subfolders within it, will be moved to the trash.",
         required: true,
       },
     ],
@@ -73,10 +70,8 @@ module.exports = {
     // from the API, Zapier will fallback to this hard-coded sample. It should reflect the data structure of
     // returned records, and have obvious placeholder values that we can show to any user.
     sample: {
-      id: "10d4c707-31a1-47d6-9332-a592991cb139/invoices",
+      id: "10d4c707-31a1-47d6-9332-a592991cb139/v234",
       status: "success",
-      repo_id: "10d4c707-31a1-47d6-9332-a592991cb139",
-      path: "/invoices",
     },
 
     outputFields: [
