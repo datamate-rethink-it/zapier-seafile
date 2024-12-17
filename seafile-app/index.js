@@ -7,6 +7,8 @@ const {
 const new_file = require("./triggers/new_file");
 const intern_repos = require("./triggers/intern_repos");
 
+const create_folder = require("./creates/create_folder");
+
 /*
 // Add this helper function above `module.exports`:
 const addApiKeyToHeader = (request, z, bundle) => {
@@ -36,7 +38,9 @@ module.exports = {
   searches: {},
 
   // If you want your creates to show up, you better include it here!
-  creates: {},
+  creates: {
+    [create_folder.key]: create_folder,
+  },
 
   resources: {},
 };

@@ -59,7 +59,7 @@ module.exports = {
     },
     outputFields: [
       { key: "id", label: "ID", type: "string" },
-      { key: "path", label: "Created At", type: "string" },
+      { key: "path", label: "Path", type: "string" },
       { key: "size", label: "Size", type: "integer" },
       { key: "type", label: "Typ", type: "string" },
       { key: "mtime", label: "Modified At", type: "string" },
