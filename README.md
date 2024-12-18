@@ -1,24 +1,25 @@
-# Zapier ...
+# Seafile Zapier Integration
 
-hier kann ich alles möglich ablegen. Im Verzeichnis `seafile-app` liegt dann nur die zapier app drin.
+This repository contains the source code for the Seafile Zapier integration. This integration allows users to automate tasks between Seafile and other apps supported by Zapier.
 
-## offene themen:
+## Features
 
-### Authentication
+- Upload files to Seafile
+- Create new folders and libraries
+- Watch for new, modified or tagged files
+- List libraries and files
+- Download files from Seafile
+- ...
 
-⠙ Invoking authentication.test(node:1795686) [DEP0097] DeprecationWarning: Using a domain property in MakeCallback is deprecated. Use the async_context variant of MakeCallback or the AsyncResource class instead. (Triggered by calling processImmediate on process.)
-(Use `node --trace-deprecation ...` to show where the warning was created)
+## Status
 
-429 status code behandeln...
-400 bad request...
+This integration is not yet published. Use this **invitation link** to get access to the current development:
+https://zapier.com/developer/public-invite/217344/ba50a07a8b5ea37039da3537438171e9/
 
-/ am Ende von server_url immer entfernen...
+## About us
 
-### repo list
+We are datamate. Primary support and sales partner of Seafile Ltd. in Europe. We
 
-- was, wenn viele viele repos? pagination?
-- dateien irgendwie anders nennen?
+## Support
 
-### tests
-
-...
+For support with this Zapier integration, please contact support@datamate.org.

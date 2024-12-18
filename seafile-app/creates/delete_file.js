@@ -32,9 +32,6 @@ module.exports = {
   operation: {
     perform,
 
-    // `inputFields` defines the fields a user could provide
-    // Zapier will pass them in as `bundle.inputData` later. They're optional.
-    // End-users will map data into these fields. In general, they should have any fields that the API can accept. Be sure to accurately mark which fields are required!
     inputFields: [
       {
         key: "repo",

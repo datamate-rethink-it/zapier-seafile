@@ -5,8 +5,14 @@
 // By returning the entire request object, you have access to the request and
 // response data for testing purposes. Your connection label can access any data
 // from the returned response using the `json.` prefix. eg: `{{json.username}}`.
-const test = (z, bundle) =>
+const test = (z, bundle) => {
+  if (!bundle.authData.serverUrl.match(/^https?:\/\/.+[^/]$/)) {
+    throw new z.errors.Error(
+      "Please correct the Server URL. It must begin with https:// and should not end with a trailing slash (/). For example: https://your-seafile-server.com."
+    );
+  }
   z.request({ url: bundle.authData.serverUrl + "/api2/auth/ping/" });
+};
 
 // This function runs after every outbound request. You can use it to check for
 // errors or modify the response. You can have as many as you need. They'll need
@@ -48,16 +54,16 @@ module.exports = {
         required: true,
         label: "Server",
         type: "string",
-        default: "https://seafile-demo.de",
-        helpText: "...",
+        default: "https://your-seafile-server-url",
+        helpText: "The public url of your Seafile Server.",
       },
       {
         key: "apiToken",
         required: true,
-        label: "Auth-Token (of a user)",
+        label: "Account-Token (for your user)",
         type: "string",
         helpText:
-          "Generate a ... token in your [app settings page](https://yourapp.com/settings)",
+          "Create an [Account-Token](https://seafile-api.readme.io/reference/post_api2-auth-token) to grant Zapier access to your Seafile Server.",
       },
     ],
 
@@ -72,7 +78,7 @@ module.exports = {
     // be `{{X}}`. This can also be a function that returns a label. That function has
     // the standard args `(z, bundle)` and data returned from the test can be accessed
     // in `bundle.inputData.X`.
-    connectionLabel: "{{json.username}}",
+    connectionLabel: "{{serverUrl}}",
   },
   befores: [includeApiToken],
   afters: [handleBadResponses],

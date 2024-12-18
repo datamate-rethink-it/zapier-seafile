@@ -22,16 +22,16 @@ const perform = async (z, bundle) => {
   return response.data.map((item) => ({
     ...item,
     file_id: item.id,
-    id: item.id, // Use the ... !!! TODO: genauer beschreiben, dass ich hier nur mit file name arbeite...
+    id: item.id + "__" + item.mtime, // Use the ...
   }));
 };
 
 module.exports = {
-  key: "new_file",
-  noun: "New File",
+  key: "new_or_updated_file",
+  noun: "New or Updated File",
   display: {
-    label: "New File",
-    description: "Triggers when a new file is found in a library.",
+    label: "New or Updated File",
+    description: "Triggers when a new or updated file is found in a library.",
   },
   operation: {
     perform,
