@@ -16,6 +16,7 @@ Initial version supporting these operations:
 - Create Text File
 - Delete Folder
 - Upload File
+- Download File
 
 **Searches:**
 
