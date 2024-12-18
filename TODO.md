@@ -45,3 +45,40 @@ hier einmal komplett drüber gehen
 bieten wir bei den trigger ergebnissen nur den pfad an und dann muss man "download file" machen? Das würde einen multi-step zap erzwingen.
 oder holen wir unmittelbar immer den content?
 Bieten wir informationen an wie bei dropbox?
+
+## klären wie trigger abgrenzen
+
+ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
+
+## Diese Funktionen will ich unterstützen:
+
+### Trigger event:
+
+[x] New File -> oder bei zapier geht, dass ich nur den vollständigen pfad+dateinamen als id verwende!
+[x] New or Updated File - kann ich das überhaupt differenzieren? nur über history! => auswahl des Pfads => einschrenken auf Dateiname /list items in directory -> repo, path, t=f, recursive = 0
+[x] New Tagged File
+[ ] New File Event
+[ ] New Shared File
+[2] New Folder
+[2] New Library
+
+### Create event:
+
+[1] Download a file
+[x] Create Folder
+[ ] Create or Append to Text File
+[ ] Create Shared Link
+[x] Create Text File
+[ ] Delete File
+[x] Delete Folder
+[ ] Move File
+[ ] Rename File
+[x] Upload File
+[1] API Request (Beta)
+
+### Search:
+
+[x] Find File
+[ ] Find File (Content Search)
+[ ] Find Folder
+[x] Find Files/Folders (Multi Line Support)

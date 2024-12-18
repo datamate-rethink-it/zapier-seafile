@@ -13,12 +13,14 @@ This repository contains the source code for the Seafile Zapier integration. Thi
 
 ## Status
 
-This integration is not yet published. Use this **invitation link** to get access to the current development:
+This integration is **not yet published**.
+
+Use this **invitation link** to get access to the current development:
 https://zapier.com/developer/public-invite/217344/ba50a07a8b5ea37039da3537438171e9/
 
 ## About us
 
-We are datamate. Primary support and sales partner of Seafile Ltd. in Europe. We
+We are datamate. Primary support and sales partner of Seafile Ltd. in Europe.
 
 ## Support
 
