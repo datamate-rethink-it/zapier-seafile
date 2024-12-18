@@ -19,11 +19,17 @@ const perform = async (z, bundle) => {
   console.log(response);
 
   // Add an 'id' field to each item in the response
-  return response.data.map((item) => ({
-    ...item,
-    file_id: item.id,
-    id: item.id, // Use the ... !!! TODO: genauer beschreiben, dass ich hier nur mit file name arbeite...
-  }));
+  return response.data.map((item) => {
+    // Remove trailing slash (in case item.parent_dir is '/')
+    const parent_dir = item.parent_dir ? item.parent_dir.replace(/\/$/, '') : '';
+
+    return {
+      ...item,
+      file_id: item.id,
+      // Use full path (without repo) to uniquely identify the file
+      id: `${parent_dir}/${item.name}`,
+    };
+  });
 };
 
 module.exports = {
