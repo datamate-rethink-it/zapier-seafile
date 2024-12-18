@@ -22,7 +22,7 @@ Bei den intern\_... pagination support?
 ## repo list
 
 - was, wenn viele viele repos? pagination?
-- dateien irgendwie anders nennen?
+- "intern" dateien irgendwie anders nennen? oder anderer ordner.
 
 ## tests
 
@@ -35,6 +35,9 @@ delete folder, that does not exist... Was passiert dann?
 ## search with line item support
 
 das nochmal intensiv drauf schauen.
+von hier: https://docs.zapier.com/platform/quickstart/recommended-triggers-and-actions
+Zapier searches automatically return only the first result in the response. To return multiple results, return the set of results as an array of objects under a descriptive key.
+https://docs.zapier.com/platform/build/response-types
 
 ## was ist noun in den dateien?
 
@@ -45,6 +48,7 @@ hier einmal komplett drüber gehen
 bieten wir bei den trigger ergebnissen nur den pfad an und dann muss man "download file" machen? Das würde einen multi-step zap erzwingen.
 oder holen wir unmittelbar immer den content?
 Bieten wir informationen an wie bei dropbox?
+=> bei den triggern, wird immer auch gleich die Datei geholt und angeboten!!! (auswählbar aber default ist yes)
 
 ## klären wie trigger abgrenzen
 
@@ -54,7 +58,7 @@ ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 
 ### Trigger event:
 
-[x] New File -> oder bei zapier geht, dass ich nur den vollständigen pfad+dateinamen als id verwende!
+[x] New File -> oder bei zapier geht, dass ich nur den vollständigen pfad+dateinamen als id verwenden!
 [x] New or Updated File - kann ich das überhaupt differenzieren? nur über history! => auswahl des Pfads => einschrenken auf Dateiname /list items in directory -> repo, path, t=f, recursive = 0
 [x] New Tagged File
 [ ] New File Event
@@ -82,6 +86,7 @@ ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 [ ] Find File (Content Search)
 [ ] Find Folder
 [x] Find Files/Folders (Multi Line Support)
+=> hier immer direkt auch die file (hydrated) mit angeben
 
 Vergleichen mit OneDrive und Dropbox.
 
@@ -89,12 +94,27 @@ Vergleichen mit OneDrive und Dropbox.
 
 Immer bei full_path mit angeben => path + filename?!?
 
-### what about webhook? Wollen wir das auch unterstützen?
-
-check...
-
 ### better error handling?!?
 
 z.B. download file und dann falsch angegeben...
 
 ## wie lange ist download link gültig? ID bei download file?
+
+wo relevant, nur bei triggern?
+
+## bei triggers:
+
+- include file contents
+- include sharing link
+
+## nicht boolean sondern string mit choices "YES", "NO".
+
+## Simon
+
+git pull
+npm install
+zapier account
+zapier link
+zapier invoke -> seafile-demo
+spielen
+trigger logik überprüfen. -> immer alles zurück? id bei new file austauschen...

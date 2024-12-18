@@ -58,8 +58,17 @@ module.exports = {
         label: "Folder Path",
         type: "string",
         placeholder: "/invoices/2024",
-        helpText:
-          "The folder, along with all files and subfolders within it, will be moved to the trash.",
+        dynamic: "intern_folders.id.name",
+        altersDynamicFields: true,
+        helpText: "The ...",
+        required: true,
+      },
+      {
+        key: "q",
+        type: "string",
+        label: "Search Term",
+        helpText: "Search String.",
+        placeholder: "customer",
         required: true,
       },
       {

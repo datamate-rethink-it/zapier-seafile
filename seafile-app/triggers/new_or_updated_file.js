@@ -61,6 +61,20 @@ module.exports = {
         type: "boolean",
         required: false,
       },
+      {
+        key: "download",
+        label: "Include file contents?",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "yes",
+        required: true,
+        altersDynamicFields: false,
+        helpText:
+          "Choose whether to download the file. Set this to NO to exclude file contents and only get the file information.",
+      },
     ],
 
     sample: {

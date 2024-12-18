@@ -46,6 +46,7 @@ module.exports = {
       {
         key: "q",
         type: "string",
+        label: "Search Term",
         helpText: "Search String (with or without path).",
         placeholder: "/invoices/2024/customer.pdf or customer.pdf",
         required: true,
