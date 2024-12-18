@@ -82,3 +82,19 @@ ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 [ ] Find File (Content Search)
 [ ] Find Folder
 [x] Find Files/Folders (Multi Line Support)
+
+Vergleichen mit OneDrive und Dropbox.
+
+## Anreichern??
+
+Immer bei full_path mit angeben => path + filename?!?
+
+### what about webhook? Wollen wir das auch unterstützen?
+
+check...
+
+### better error handling?!?
+
+z.B. download file und dann falsch angegeben...
+
+## wie lange ist download link gültig? ID bei download file?
