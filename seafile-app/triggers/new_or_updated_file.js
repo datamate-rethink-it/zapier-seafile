@@ -1,5 +1,7 @@
 const hydrators = require("../hydrators");
 
+const SHARE_LINK_EXPIRE_DAYS = 7;
+
 const perform = async (z, bundle) => {
   const params = {
     t: "f",
