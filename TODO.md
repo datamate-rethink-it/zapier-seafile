@@ -19,10 +19,17 @@ https://docs.zapier.com/platform/publish/integration-checks-reference#d002-provi
 
 Bei den intern\_... pagination support?
 
+-> Pagination deaktiviert
+
 ## repo list
 
 - was, wenn viele viele repos? pagination?
+-> Pagination deaktiviert
+
 - "intern" dateien irgendwie anders nennen? oder anderer ordner.
+
+-> Offizielles Beispiel: https://github.com/zapier/zapier-platform/tree/main/example-apps/dynamic-dropdown
+-> gleicher Ordner, ohne "intern" (nur "hidden" auf true gesetzt)
 
 ## tests
 
@@ -31,6 +38,9 @@ einfache tests mit beispieldaten bauen?
 ## error handling
 
 delete folder, that does not exist... Was passiert dann?
+
+-> Seafile API liefert 404
+-> Zapier zeigt den Fehler
 
 ## search with line item support
 
@@ -43,6 +53,8 @@ https://docs.zapier.com/platform/build/response-types
 
 hier einmal komplett drüber gehen
 
+-> "A single noun that describes what this action creates, used by Zapier to auto-generate text in Zaps about your action."
+
 ## download file from seafile
 
 bieten wir bei den trigger ergebnissen nur den pfad an und dann muss man "download file" machen? Das würde einen multi-step zap erzwingen.
@@ -50,9 +62,13 @@ oder holen wir unmittelbar immer den content?
 Bieten wir informationen an wie bei dropbox?
 => bei den triggern, wird immer auch gleich die Datei geholt und angeboten!!! (auswählbar aber default ist yes)
 
+-> für die 3 Trigger umgesetzt
+
 ## klären wie trigger abgrenzen
 
 ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
+
+-> Korrekt!
 
 ## Diese Funktionen will ich unterstützen:
 
@@ -98,16 +114,24 @@ Immer bei full_path mit angeben => path + filename?!?
 
 z.B. download file und dann falsch angegeben...
 
+-> Zapier zeigt Fehler an: "The path must start with a /."/"File not found"
+
 ## wie lange ist download link gültig? ID bei download file?
 
 wo relevant, nur bei triggern?
+
+-> Afaict nur bei Triggern: https://docs.zapier.com/platform/build/deduplication
 
 ## bei triggers:
 
 - include file contents
 - include sharing link
 
+-> Done, sharing link wird nur zurückgeliefert, falls es noch keinen Link für die gleiche Datei gibt, da die Seafile-API sonst einen Fehler zurückliefert
+
 ## nicht boolean sondern string mit choices "YES", "NO".
+
+-> Umgesetzt
 
 ## Simon
 
