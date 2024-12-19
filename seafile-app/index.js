@@ -23,6 +23,7 @@ const create_text_file = require("./creates/create_text_file");
 const delete_file = require("./creates/delete_file");
 const upload_file = require("./creates/upload_file");
 const download_file = require("./creates/download_file");
+const create_share_link = require("./creates/create_share_link");
 
 // search
 const find_file = require("./searches/find_file");
@@ -60,6 +61,7 @@ module.exports = {
     [delete_file.key]: delete_file,
     [upload_file.key]: upload_file,
     [download_file.key]: download_file,
+    [create_share_link.key]: create_share_link,
   },
 
   resources: {},
