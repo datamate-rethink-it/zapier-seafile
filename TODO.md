@@ -49,6 +49,9 @@ von hier: https://docs.zapier.com/platform/quickstart/recommended-triggers-and-a
 Zapier searches automatically return only the first result in the response. To return multiple results, return the set of results as an array of objects under a descriptive key.
 https://docs.zapier.com/platform/build/response-types
 
+-> Funktioniert mit Looping
+-> Single "find File" nochmal anschauen (notwendig?)
+
 ## was ist noun in den dateien?
 
 hier einmal komplett drüber gehen
@@ -69,6 +72,7 @@ Bieten wir informationen an wie bei dropbox?
 ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 
 -> Korrekt!
+-> Kann auch per "primary" in "outputFields" festgelegt werden (auch mehrere Felder)
 
 ## Diese Funktionen will ich unterstützen:
 
@@ -84,12 +88,12 @@ ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 
 ### Create event:
 
-[1] Download a file
+[x] Download a file
 [x] Create Folder
 [ ] Create or Append to Text File
-[ ] Create Shared Link
+[x] Create Shared Link
 [x] Create Text File
-[ ] Delete File
+[x] Delete File
 [x] Delete Folder
 [ ] Move File
 [ ] Rename File
