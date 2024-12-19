@@ -1,3 +1,7 @@
+const hydrators = require("../hydrators");
+
+const SHARE_LINK_EXPIRE_DAYS = 7;
+
 const perform = async (z, bundle) => {
   const params = {
     t: "f",
@@ -16,20 +20,63 @@ const perform = async (z, bundle) => {
   };
 
   const response = await z.request(requestOptions);
-  console.log(response);
 
-  // Add an 'id' field to each item in the response
-  return response.data.map((item) => {
+  const items = [];
+
+  for (const item of response.data) {
     // Remove trailing slash (in case item.parent_dir is '/')
-    const parent_dir = item.parent_dir ? item.parent_dir.replace(/\/$/, '') : '';
+    const parentDir = item.parent_dir ? item.parent_dir.replace(/\/$/, '') : '';
 
-    return {
-      ...item,
-      file_id: item.id,
-      // Use full path (without repo) to uniquely identify the file
-      id: `${parent_dir}/${item.name}`,
-    };
-  });
+    // Add an 'id' field to each item
+    // Use full path (without repo) to uniquely identify the file
+    item.file_id = item.id;
+    item.id = `${parentDir}/${item.name}`;
+
+    if (bundle.inputData.download) {
+      // Get download_url
+      const response = await z.request({
+        method: "GET",
+        url: `${bundle.authData.serverUrl}/api2/repos/${bundle.inputData.repo}/file/`,
+        params: {
+          p: `${parentDir}/${item.name}`,
+        },
+        json: true,
+      });
+
+      item.file = z.dehydrateFile(hydrators.downloadFile, { url: response.data })
+    }
+
+    if (bundle.inputData.link) {
+      // Create share link
+      try {
+        const response = await z.request({
+          method: "POST",
+          url: `${bundle.authData.serverUrl}/api/v2.1/share-links/`,
+          body: {
+            repo_id: bundle.inputData.repo,
+            path: `${parentDir}/${item.name}`,
+            expire_days: SHARE_LINK_EXPIRE_DAYS,
+            permissions: {
+              can_edit: false,
+              can_download: true,
+              can_upload: false,
+            },
+          },
+          json: true,
+        });
+
+        // Attach link to 'item' object
+        item.link = response.data.link;
+      } catch(e) {
+        // TODO: Expose warning to user?
+        console.log('Could not create share link: ', e);
+      }
+    }
+
+    items.push(item);
+  }
+
+  return items;
 };
 
 module.exports = {
@@ -66,6 +113,33 @@ module.exports = {
         label: "Include files in subfolders?",
         type: "boolean",
         required: false,
+      },
+      {
+        key: "download",
+        label: "Include file contents?",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "yes",
+        required: true,
+        altersDynamicFields: false,
+        helpText:
+          "Choose whether to download the file. Set this to NO to exclude file contents and only get the file information.",
+      },
+      {
+        key: "link",
+        label: "Include sharing link?",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "yes",
+        required: true,
+        altersDynamicFields: false,
+        helpText: "Choose whether to include a sharing link.",
       },
     ],
 
