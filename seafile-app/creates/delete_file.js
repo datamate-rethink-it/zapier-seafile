@@ -66,7 +66,7 @@ module.exports = {
     // Alternatively, a static field definition can be provided, to specify labels for the fields
     outputFields: [
       { key: "commit_id", label: "ID" },
-      { key: "success", label: "Success" },
+      { key: "success", label: "Success", type: "boolean" },
     ],
   },
 };

@@ -139,7 +139,7 @@ module.exports = {
       { key: "parent_dir", label: "Path", type: "string" },
       { key: "size", label: "Size", type: "integer" },
       { key: "type", label: "Typ", type: "string" },
-      { key: "mtime", label: "Modified At", type: "string" },
+      { key: "mtime", label: "Modified At", type: "integer" },
       { key: "modifier_contact_email", label: "Contact E-Mail" },
     ],
   },
