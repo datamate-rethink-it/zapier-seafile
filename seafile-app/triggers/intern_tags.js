@@ -15,12 +15,6 @@ const perform = async (z, bundle) => {
     url: `${bundle.authData.serverUrl}/api/v2.1/repos/${bundle.inputData.repo}/repo-tags/`,
   };
 
-  // TODO: add pagination support...
-  // This API returns things in "pages" of results
-  //if (bundle.meta.page) {
-  //  request.params.page = 1 + bundle.meta.page;
-  //}
-
   const repoTags = await z.request(request);
 
   if (repoTags.data.repo_tags) {
@@ -47,9 +41,6 @@ module.exports = {
   operation: {
     // Since this is a "hidden" trigger, there aren't any inputFields needed
     perform,
-    // The folowing is a "hint" to the Zap Editor that this trigger returns data
-    // "in pages", and that the UI should display an option to "load more" to
-    // the human.
-    canPaginate: true,
+    canPaginate: false,
   },
 };
