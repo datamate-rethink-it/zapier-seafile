@@ -20,9 +20,13 @@ const perform = async (z, bundle) => {
     json: true,
   });
 
+  // Client-side search
+  const query = bundle.inputData.q.toLowerCase();
+  const items = response.data.filter(item => item.name.toLowerCase().includes(query));
+
   return [
     {
-      items: response.data,
+      items,
     },
   ];
 };
@@ -66,7 +70,7 @@ module.exports = {
         key: "q",
         type: "string",
         label: "Search Term",
-        helpText: "Search String.",
+        helpText: "Search String (case-insensitive + substring match).",
         placeholder: "customer",
         required: true,
       },
