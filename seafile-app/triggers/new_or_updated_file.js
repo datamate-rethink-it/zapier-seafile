@@ -6,12 +6,8 @@ const perform = async (z, bundle) => {
   const params = {
     t: "f",
     p: bundle.inputData.path,
-    recursive: bundle.inputData.recursive ? "1" : "0",
+    recursive: bundle.inputData.recursive === 'yes' ? "1" : "0",
   };
-
-  /*if (bundle.inputData.recursive) {
-    params.recursive = "1";
-  }*/
 
   const requestOptions = {
     method: "GET",
@@ -114,7 +110,12 @@ module.exports = {
       {
         key: "recursive",
         label: "Include files in subfolders?",
-        type: "boolean",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "no",
         required: false,
       },
       {

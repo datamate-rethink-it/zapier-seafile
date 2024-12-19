@@ -15,7 +15,7 @@ const perform = async (z, bundle) => {
     json: true,
   });
 
-  if (bundle.inputData.link_only) {
+  if (bundle.inputData.link_only === 'yes') {
     return {
       download_link: response.data,
     };
@@ -74,7 +74,12 @@ module.exports = {
       {
         key: "link_only",
         label: "Download Link Only",
-        type: "boolean",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "no",
         helpText: "Whether to return the file or just the download link",
       },
     ],

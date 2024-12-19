@@ -1,4 +1,3 @@
-// create a particular delete_file by name
 const perform = async (z, bundle) => {
   if (!bundle.inputData.path.startsWith("/")) {
     throw new z.errors.Error(`Path has to start with /`);
@@ -9,7 +8,7 @@ const perform = async (z, bundle) => {
   if (bundle.inputData.output == "f" || bundle.inputData.output == "d") {
     filters.t = bundle.inputData.output;
   }
-  filters.recursive = bundle.inputData.recursive ? "1" : "0";
+  filters.recursive = bundle.inputData.recursive === 'yes' ? "1" : "0";
 
   const response = await z.request({
     method: "GET",
@@ -85,10 +84,15 @@ module.exports = {
       {
         key: "recursive",
         label: "Recursive",
-        type: "boolean",
+        type: "string",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "no",
         required: true,
         helpText:
-          "Whether the find operation will be applied recursively to all subfolders and the response will contain contents of all subfolders. The default for this field is False.",
+          "Whether the find operation will be applied recursively to all subfolders and the response will contain contents of all subfolders. The default for this field is No.",
       },
     ],
 

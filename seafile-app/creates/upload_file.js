@@ -36,7 +36,7 @@ const perform = async (z, bundle) => {
 
   // relative path and replace
   const relative_path = bundle.inputData.path.replace(/^\/|\/$/g, "");
-  const replace = bundle.inputData.overwrite ? 1 : 0;
+  const replace = bundle.inputData.overwrite === 'yes' ? 1 : 0;
 
   // generate upload-link
   const response = await z.request({
@@ -125,7 +125,11 @@ module.exports = {
       {
         key: "overwrite",
         label: "Overwrite Existing",
-        type: "boolean",
+        choices: [
+          { label: "Yes", sample: "yes", value: "yes" },
+          { label: "No", sample: "no", value: "no" },
+        ],
+        default: "no",
         helpText:
           "Whether force that an existing file is overwritten. Otherwise the filename is extended with an number in brackets like `invoice (1).pdf`.",
       },
