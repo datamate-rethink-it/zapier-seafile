@@ -24,9 +24,9 @@ Open topics, that have to be clarified before released to the public. After firs
 [x] Delete File
 [x] Delete Folder
 [x] Move File
-[ ] Rename File
+[x] Rename File
 [x] Upload File
-[1] API Request (Beta)
+[!] API Request (Beta)
 
 ### Search:
 

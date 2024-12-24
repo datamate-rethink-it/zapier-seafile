@@ -20,7 +20,7 @@ const perform = async (z, bundle) => {
   if (
     bundle.inputData.querys &&
     typeof bundle.inputData.querys === "object" &&
-    bundle.inputData.querys.length() > 0
+    bundle.inputData.querys.length > 0
   ) {
     queryString = Object.keys(bundle.inputData.querys)
       .map(function (key) {
@@ -31,20 +31,22 @@ const perform = async (z, bundle) => {
   }
 
   // check body input
+  let bodyContent = {};
   z.console.log("inputDataRaw.body", bundle.inputData.body);
   if (!isJsonString(bundle.inputData.body)) {
     throw new Error("Your body seems to be no valid JSON.");
+  } else {
+    bodyContent = JSON.parse(bundle.inputData.body);
   }
-  const body = bundle.inputData.body;
 
   const request = {
-    url: `${bundle.authData.server}${bundle.inputData.endpoint}${queryString}`,
+    url: `${bundle.authData.serverUrl}${bundle.inputData.endpoint}${queryString}`,
     method: `${bundle.inputData.http_method}`,
     headers: {
       accept: "application/json",
       "content-type": "application/json",
     },
-    body,
+    body: bodyContent,
   };
   z.console.log("API Request", request);
 
@@ -99,6 +101,7 @@ module.exports = {
         helpText:
           'Only valid JSON is accepted. Zapier will pass anything you enter as raw input. For example, `{"foo", "bar"}` is perfectly valid. Of cause you can use variables from Zapier inside your JSON.',
         type: "text",
+        default: "{}",
       },
     ],
 
