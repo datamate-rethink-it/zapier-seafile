@@ -3,9 +3,6 @@ const perform = async (z, bundle) => {
   if (!bundle.inputData.path.startsWith("/")) {
     throw new z.errors.Error(`The source path must start with a /.`);
   }
-  if (!bundle.inputData.target_path.startsWith("/")) {
-    throw new z.errors.Error(`The target path must start with a /.`);
-  }
 
   // generate upload-link
   const response = await z.request({
@@ -15,9 +12,8 @@ const perform = async (z, bundle) => {
       p: bundle.inputData.path,
     },
     body: {
-      operation: "move",
-      dst_repo: bundle.inputData.target_repo,
-      dst_dir: bundle.inputData.target_path,
+      operation: "rename",
+      newname: bundle.inputData.new_file_name,
     },
     json: true,
   });
@@ -27,12 +23,12 @@ const perform = async (z, bundle) => {
 };
 
 module.exports = {
-  key: "move_file",
-  noun: "Move File",
+  key: "rename_file",
+  noun: "Rename File",
 
   display: {
-    label: "Move File",
-    description: "Moves a file to another library or folder.",
+    label: "Rename File",
+    description: "Renames a file.",
   },
 
   operation: {
@@ -57,20 +53,11 @@ module.exports = {
         required: true,
       },
       {
-        key: "target_repo",
-        label: "Target Library",
+        key: "new_file_name",
+        label: "New File Name",
         type: "string",
-        helpText: "Libary Name or ID.",
-        dynamic: "intern_repos.id.name",
-        altersDynamicFields: true,
-        required: true,
-      },
-      {
-        key: "target_path",
-        label: "Target Path",
-        type: "string",
-        placeholder: "/invoices/2024",
-        helpText: "Provide the target path (without the file name)",
+        placeholder: "new-filename.pdf",
+        helpText: "Provide the new file name (without any path)",
         required: true,
       },
     ],
@@ -82,9 +69,9 @@ module.exports = {
       type: "file",
       repo_id: "92ce82d6-7432-4fd3-b75e-303fcaf9d4b4",
       parent_dir: "/",
-      obj_name: "invoice.pdf",
+      obj_name: "new-invoice.md",
       obj_id: "1eecbc923b248fbf53e8523dc6058ee784f11b14",
-      size: 16,
+      size: 416,
       mtime: "2024-12-24T11:16:20+01:00",
       is_locked: false,
       can_preview: true,
@@ -97,7 +84,7 @@ module.exports = {
     // Alternatively, a static field definition can be provided, to specify labels for the fields
     outputFields: [
       { key: "repo_id", label: "Target Repo ID", type: "boolean" },
-      { key: "obj_name", label: "File Name", primary: true },
+      { key: "obj_name", label: "New File Name", primary: true },
       { key: "mtime", label: "Modify Time", primary: true },
       { key: "obj_id", label: "Object ID", primary: true },
     ],
