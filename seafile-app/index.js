@@ -24,10 +24,13 @@ const delete_file = require("./creates/delete_file");
 const upload_file = require("./creates/upload_file");
 const download_file = require("./creates/download_file");
 const create_share_link = require("./creates/create_share_link");
+const move_file = require("./creates/move_file");
 
 // search
 const find_file = require("./searches/find_file");
 const find_files_folder = require("./searches/find_files_folder");
+
+const createRenameFile = require("./creates/rename_file");
 
 module.exports = {
   version: require("./package.json").version,
@@ -62,6 +65,8 @@ module.exports = {
     [upload_file.key]: upload_file,
     [download_file.key]: download_file,
     [create_share_link.key]: create_share_link,
+    [move_file.key]: move_file,
+    [createRenameFile.key]: createRenameFile
   },
 
   resources: {},

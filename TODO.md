@@ -2,6 +2,42 @@
 
 Open topics, that have to be clarified before released to the public. After first cleanup, this should be transferred to github issues.
 
+## Diese Funktionen will ich unterstützen:
+
+### Trigger event:
+
+[x] New File -> oder bei zapier geht, dass ich nur den vollständigen pfad+dateinamen als id verwenden!
+[x] New or Updated File - kann ich das überhaupt differenzieren? nur über history! => auswahl des Pfads => einschrenken auf Dateiname /list items in directory -> repo, path, t=f, recursive = 0
+[x] New Tagged File
+[ ] New File Event
+[ ] New Shared File
+[2] New Folder
+[2] New Library
+
+### Create event:
+
+[x] Download a file
+[x] Create Folder
+[ ] Create or Append to Text File
+[x] Create Shared Link
+[x] Create Text File
+[x] Delete File
+[x] Delete Folder
+[x] Move File
+[ ] Rename File
+[x] Upload File
+[1] API Request (Beta)
+
+### Search:
+
+[x] Find File
+[ ] Find File (Content Search)
+[ ] Find Folder
+[x] Find Files/Folders (Multi Line Support)
+=> hier immer direkt auch die file (hydrated) mit angeben
+
+Vergleichen mit OneDrive und Dropbox.
+
 ## Authentication Warning:
 
 ⠙ Invoking authentication.test(node:1795686) [DEP0097] DeprecationWarning: Using a domain property in MakeCallback is deprecated. Use the async_context variant of MakeCallback or the AsyncResource class instead. (Triggered by calling processImmediate on process.)
@@ -9,6 +45,8 @@ Open topics, that have to be clarified before released to the public. After firs
 
 429 status code behandeln...
 400 bad request...
+
+-> nodejs problem. Zapier has to solve that.
 
 ## Warnings
 
@@ -24,7 +62,7 @@ Bei den intern\_... pagination support?
 ## repo list
 
 - was, wenn viele viele repos? pagination?
--> Pagination deaktiviert
+  -> Pagination deaktiviert
 
 - "intern" dateien irgendwie anders nennen? oder anderer ordner.
 
@@ -41,6 +79,7 @@ delete folder, that does not exist... Was passiert dann?
 
 -> Seafile API liefert 404
 -> Zapier zeigt den Fehler
+-> somit alles ok.
 
 ## search with line item support
 
@@ -73,42 +112,6 @@ ich bin der meinung zapier kümmert sich über die ID selbst darum. Klären!
 
 -> Korrekt!
 -> Kann auch per "primary" in "outputFields" festgelegt werden (auch mehrere Felder)
-
-## Diese Funktionen will ich unterstützen:
-
-### Trigger event:
-
-[x] New File -> oder bei zapier geht, dass ich nur den vollständigen pfad+dateinamen als id verwenden!
-[x] New or Updated File - kann ich das überhaupt differenzieren? nur über history! => auswahl des Pfads => einschrenken auf Dateiname /list items in directory -> repo, path, t=f, recursive = 0
-[x] New Tagged File
-[ ] New File Event
-[ ] New Shared File
-[2] New Folder
-[2] New Library
-
-### Create event:
-
-[x] Download a file
-[x] Create Folder
-[ ] Create or Append to Text File
-[x] Create Shared Link
-[x] Create Text File
-[x] Delete File
-[x] Delete Folder
-[ ] Move File
-[ ] Rename File
-[x] Upload File
-[1] API Request (Beta)
-
-### Search:
-
-[x] Find File
-[ ] Find File (Content Search)
-[ ] Find Folder
-[x] Find Files/Folders (Multi Line Support)
-=> hier immer direkt auch die file (hydrated) mit angeben
-
-Vergleichen mit OneDrive und Dropbox.
 
 ## Anreichern??
 
