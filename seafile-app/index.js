@@ -26,6 +26,7 @@ const download_file = require("./creates/download_file");
 const create_share_link = require("./creates/create_share_link");
 const move_file = require("./creates/move_file");
 const rename_file = require("./creates/rename_file");
+const api_request = require("./creates/api_request");
 
 // search
 const find_file = require("./searches/find_file");
@@ -66,6 +67,7 @@ module.exports = {
     [create_share_link.key]: create_share_link,
     [move_file.key]: move_file,
     [rename_file.key]: rename_file,
+    [api_request.key]: api_request,
   },
 
   resources: {},
