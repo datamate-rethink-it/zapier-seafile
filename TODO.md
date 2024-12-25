@@ -2,11 +2,6 @@
 
 Open topics, that have to be clarified before released to the public. After first cleanup, this should be transferred to github issues.
 
-## Tests with 0.9.7
-
-- New or updated files, look in subfolder -> er findet die Datei zum download nicht...
-- remove datamate users
-
 ## Diese Funktionen will ich unterstützen:
 
 ### Trigger event:
@@ -35,7 +30,7 @@ Open topics, that have to be clarified before released to the public. After firs
 
 ### Search:
 
-[x] Find File
+[ ] Find File
 [ ] Find File (Content Search)
 [ ] Find Folder
 [x] Find Files/Folders (Multi Line Support)
