@@ -53,7 +53,7 @@ module.exports = {
   },
 
   searches: {
-    [find_file.key]: find_file,
+    //[find_file.key]: find_file,
     [find_files_folder.key]: find_files_folder,
   },
 

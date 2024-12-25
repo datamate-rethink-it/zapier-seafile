@@ -1,6 +1,5 @@
 const hydrators = require("../hydrators");
-
-const SHARE_LINK_EXPIRE_DAYS = 7;
+const removeTrailingSlash = (str) => str.replace(/\/$/, "");
 
 const perform = async (z, bundle) => {
   const requestOptions = {
@@ -18,55 +17,59 @@ const perform = async (z, bundle) => {
   const items = [];
 
   for (const item of response.data.tagged_files) {
-    // Remove trailing slash (in case item.parent_dir is '/')
-    const parentPath = item.parent_path ? item.parent_path.replace(/\/$/, '') : '';
+    // ignore entries older than one day in general
+    const oneDayAgo = Math.floor(Date.now() / 1000) - 86400;
+    if (item.mtime > oneDayAgo) {
+      const fullPath = removeTrailingSlash(item.parent_path);
 
-    // Add an 'id' field to each item
-    item.file_id = item.id;
-    item.id = item.file_tag_id + "__" + parentPath + '/' + item.filename;
+      // Add an 'id' field to each item (WITHOUT mtime)
+      item.file_id = item.id;
+      item.id = item.file_tag_id + "__" + fullPath + "/" + item.filename;
 
-    if (bundle.inputData.download) {
-      // Get download_url
-      const response = await z.request({
-        method: "GET",
-        url: `${bundle.authData.serverUrl}/api2/repos/${bundle.inputData.repo}/file/`,
-        params: {
-          p: `${parentPath}/${item.filename}`,
-        },
-        json: true,
-      });
-
-      item.file = z.dehydrateFile(hydrators.downloadFile, { url: response.data })
-    }
-
-    if (bundle.inputData.link) {
-      // Create share link
-      try {
+      if (bundle.inputData.download === "yes") {
+        // Get download_url
         const response = await z.request({
-          method: "POST",
-          url: `${bundle.authData.serverUrl}/api/v2.1/share-links/`,
-          body: {
-            repo_id: bundle.inputData.repo,
-            path: `${parentPath}/${item.filename}`,
-            expire_days: SHARE_LINK_EXPIRE_DAYS,
-            permissions: {
-              can_edit: false,
-              can_download: true,
-              can_upload: false,
-            },
+          method: "GET",
+          url: `${bundle.authData.serverUrl}/api2/repos/${bundle.inputData.repo}/file/`,
+          params: {
+            p: `${fullPath}/${item.name}`,
           },
           json: true,
         });
 
-        // Attach link to 'item' object
-        item.link = response.data.link;
-      } catch(e) {
-        // TODO: Expose warning to user?
-        console.log('Could not create share link: ', e);
+        item.file = z.dehydrateFile(hydrators.downloadFile, {
+          url: response.data,
+        });
       }
-    }
 
-    items.push(item);
+      if (bundle.inputData.link === "yes") {
+        // Create share link
+        try {
+          const response = await z.request({
+            method: "POST",
+            url: `${bundle.authData.serverUrl}/api/v2.1/share-links/`,
+            body: {
+              repo_id: bundle.inputData.repo,
+              path: `${fullPath}/${item.name}`,
+              permissions: {
+                can_edit: false,
+                can_download: true,
+                can_upload: false,
+              },
+            },
+            json: true,
+          });
+
+          // Attach link to 'item' object
+          item.download_link = response.data.link;
+        } catch (e) {
+          // No warning to the user, if a link already exists
+          console.log("Could not create share link: ", e);
+        }
+      }
+
+      items.push(item);
+    }
   }
 
   return items;
@@ -110,35 +113,41 @@ module.exports = {
           { label: "Yes", sample: "yes", value: "yes" },
           { label: "No", sample: "no", value: "no" },
         ],
-        default: "yes",
+        default: "no",
         required: true,
         altersDynamicFields: false,
         helpText:
-          "Choose whether to download the file. Set this to NO to exclude file contents and only get the file information.",
+          "Choose whether to download the file. Set this to YES to include file contents next to the file information.",
       },
       {
         key: "link",
-        label: "Include sharing link?",
+        label: "Include public download link?",
         type: "string",
         choices: [
           { label: "Yes", sample: "yes", value: "yes" },
           { label: "No", sample: "no", value: "no" },
         ],
-        default: "yes",
+        default: "no",
         required: true,
         altersDynamicFields: false,
-        helpText: "Choose whether to include a sharing link.",
+        helpText:
+          "Choose whether to include a public download link. The download link never expires. If you need the link to expire, use a separate action.",
       },
     ],
 
     sample: {
-      id: "adfaf",
+      id: "1__/invoice.pdf",
+      modifier_email: "37552c94ff1a4783b58f325a75e18df8@auth.local",
+      size: 63179,
+      filename: "invoice.pdf",
+      mtime: 1734505610,
+      file_tag_id: 1,
+      modifier_contact_email: "john.doe@example.com",
+      modifier_name: "John Doe",
     },
     outputFields: [
       { key: "id", label: "ID", type: "string" },
-      { key: "parent_dir", label: "Path", type: "string" },
       { key: "size", label: "Size", type: "integer" },
-      { key: "type", label: "Typ", type: "string" },
       { key: "mtime", label: "Modified At", type: "integer" },
       { key: "modifier_contact_email", label: "Contact E-Mail" },
     ],

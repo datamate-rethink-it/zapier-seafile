@@ -59,7 +59,7 @@ module.exports = {
   noun: "API Request",
 
   display: {
-    label: "API Request",
+    label: "API Request (Beta)",
     description:
       "This is an advanced action to execute a Seafile API call via Zapier. This is useful if you would like to use an API endpoint that Zapier doesn't implement yet. You can get all possible requests and their parameters from the https://seafile-api.readme.io/reference.",
   },
