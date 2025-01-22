@@ -4,6 +4,7 @@ module.exports = {
     const filePromise = z.request({
       url: bundle.inputData.url,
       raw: true,
+      //redirect: "follow", TODO:do I need this???
     });
 
     // When `raw` is true, the result of z.request() can be passed to

@@ -22,6 +22,14 @@ https://zapier.com/developer/public-invite/217344/ba50a07a8b5ea37039da3537438171
 
 We are datamate. Primary support and sales partner of Seafile Ltd. in Europe.
 
+## Contributing
+
+Pull requests welcome. Please follow existing code style and add tests for new features.
+
 ## Support
 
 For support with this Zapier integration, please contact support@datamate.org.
+
+## Licensing
+
+This app is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later).

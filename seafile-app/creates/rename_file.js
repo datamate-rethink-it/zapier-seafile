@@ -83,7 +83,7 @@ module.exports = {
     // https://github.com/zapier/zapier-platform/tree/main/packages/cli#customdynamic-fields
     // Alternatively, a static field definition can be provided, to specify labels for the fields
     outputFields: [
-      { key: "repo_id", label: "Target Repo ID", type: "boolean" },
+      { key: "repo_id", label: "Target Repo ID", type: "string" },
       { key: "obj_name", label: "New File Name", primary: true },
       { key: "mtime", label: "Modify Time", primary: true },
       { key: "obj_id", label: "Object ID", primary: true },

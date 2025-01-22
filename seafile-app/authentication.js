@@ -34,9 +34,10 @@ const handleBadResponses = (response, z, bundle) => {
 // need. They'll need to each be registered in your index.js file.
 const includeApiToken = (request, z, bundle) => {
   if (bundle.authData.apiToken) {
-    request.headers.Authorization = "Bearer " + bundle.authData.apiToken;
+    request.headers.Authorization = "Token " + bundle.authData.apiToken;
+    //TODO: Currently Token is supported by all versions up to 11. But has to be replaced with "Bearer" in the future...
   }
-
+  console.log("REQUEST", request);
   return request;
 };
 
