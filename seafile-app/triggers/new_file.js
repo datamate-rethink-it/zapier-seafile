@@ -87,7 +87,7 @@ const perform = async (z, bundle) => {
 
 module.exports = {
   key: "new_file",
-  noun: "New File",
+  noun: "File",
   display: {
     label: "New File",
     description:

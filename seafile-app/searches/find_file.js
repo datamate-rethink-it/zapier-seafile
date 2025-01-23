@@ -25,7 +25,7 @@ const perform = async (z, bundle) => {
 
 module.exports = {
   key: "find_file",
-  noun: "Find File",
+  noun: "File",
   display: {
     label: "Find File",
     description: "Returns the file ...",

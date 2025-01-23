@@ -37,7 +37,6 @@ const includeApiToken = (request, z, bundle) => {
     request.headers.Authorization = "Token " + bundle.authData.apiToken;
     //TODO: Currently Token is supported by all versions up to 11. But has to be replaced with "Bearer" in the future...
   }
-  console.log("REQUEST", request);
   return request;
 };
 
@@ -56,7 +55,8 @@ module.exports = {
         label: "Server",
         type: "string",
         default: "https://your-seafile-server-url",
-        helpText: "The public url of your Seafile Server.",
+        helpText:
+          "The public url of your Seafile Server. For installation instructions, please refer to the [Seafile Admin Manual](https://manual.seafile.com/ex).",
       },
       {
         key: "apiToken",

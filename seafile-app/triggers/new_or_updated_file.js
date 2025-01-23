@@ -87,7 +87,7 @@ const perform = async (z, bundle) => {
 
 module.exports = {
   key: "new_or_updated_file",
-  noun: "New or Updated File",
+  noun: "File",
   display: {
     label: "New or Updated File",
     description: "Triggers when a new or updated file is found in a library.",

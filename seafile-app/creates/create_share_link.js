@@ -1,3 +1,5 @@
+const removeTrailingSlash = (str) => str.replace(/\/$/, "");
+
 const perform = async (z, bundle) => {
   if (!bundle.inputData.path.startsWith("/")) {
     throw new z.errors.Error(`The path must start with a /.`);
@@ -5,7 +7,8 @@ const perform = async (z, bundle) => {
 
   const body = {
     repo_id: bundle.inputData.repo,
-    path: bundle.inputData.path + '/' + bundle.inputData.name,
+    path:
+      removeTrailingSlash(bundle.inputData.path) + "/" + bundle.inputData.name,
     expire_days: bundle.inputData.expire_days,
     permissions: {
       can_edit: false,
@@ -19,7 +22,7 @@ const perform = async (z, bundle) => {
   }
 
   const response = await z.request({
-    method: 'POST',
+    method: "POST",
     url: `${bundle.authData.serverUrl}/api/v2.1/share-links/`,
     body,
   });
@@ -28,11 +31,11 @@ const perform = async (z, bundle) => {
 };
 
 module.exports = {
-  key: 'create_share_link',
-  noun: 'Share Link',
+  key: "create_share_link",
+  noun: "Share Link",
   display: {
-    label: 'Create Share Link',
-    description: 'Creates a new share link.'
+    label: "Create Share Link",
+    description: "Creates a new share link.",
   },
   operation: {
     perform,
@@ -62,16 +65,16 @@ module.exports = {
         required: true,
       },
       {
-        key: 'password',
-        label: 'Password',
-        type: 'string',
+        key: "password",
+        label: "Password",
+        type: "string",
         required: false,
       },
       {
-        key: 'expire_days',
-        label: 'Expiration Time in Days',
-        type: 'string',
-        default: '7',
+        key: "expire_days",
+        label: "Expiration Time in Days",
+        type: "string",
+        default: "7",
         required: true,
       },
     ],
@@ -92,17 +95,17 @@ module.exports = {
       permissions: {
         can_edit: false,
         can_download: true,
-        can_upload: false
+        can_upload: false,
       },
       password: "",
-      can_edit: true
+      can_edit: true,
     },
     outputFields: [
-      { key: 'repo_id', label: 'Library ID' },
-      { key: 'repo_name', label: 'Library Name' },
-      { key: 'is_dir', label: 'Is Directory', type: 'boolean' },
-      { key: 'view_cnt', label: 'View Count', type: 'integer' },
-      { key: 'ctime', label: 'Created At' },
+      { key: "repo_id", label: "Library ID" },
+      { key: "repo_name", label: "Library Name" },
+      { key: "is_dir", label: "Is Directory", type: "boolean" },
+      { key: "view_cnt", label: "View Count", type: "integer" },
+      { key: "ctime", label: "Created At" },
     ],
-  }
+  },
 };

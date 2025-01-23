@@ -15,16 +15,17 @@ const perform = async (z, bundle) => {
   }
 
   const items = [];
+  const oneDayAgo = Math.floor(Date.now() / 1000) - 86400;
 
   for (const item of response.data.tagged_files) {
     // ignore entries older than one day in general
-    const oneDayAgo = Math.floor(Date.now() / 1000) - 86400;
     if (item.mtime > oneDayAgo) {
-      const fullPath = removeTrailingSlash(item.parent_path);
+      let fullPath = removeTrailingSlash(item.parent_path);
+      let pathPlusFile = fullPath + "/" + item.filename;
 
       // Add an 'id' field to each item (WITHOUT mtime)
       item.file_id = item.id;
-      item.id = item.file_tag_id + "__" + fullPath + "/" + item.filename;
+      item.id = item.file_tag_id + "__" + pathPlusFile;
 
       if (bundle.inputData.download === "yes") {
         // Get download_url
@@ -32,7 +33,7 @@ const perform = async (z, bundle) => {
           method: "GET",
           url: `${bundle.authData.serverUrl}/api2/repos/${bundle.inputData.repo}/file/`,
           params: {
-            p: `${fullPath}/${item.name}`,
+            p: pathPlusFile,
           },
           json: true,
         });
@@ -50,7 +51,7 @@ const perform = async (z, bundle) => {
             url: `${bundle.authData.serverUrl}/api/v2.1/share-links/`,
             body: {
               repo_id: bundle.inputData.repo,
-              path: `${fullPath}/${item.name}`,
+              path: pathPlusFile,
               permissions: {
                 can_edit: false,
                 can_download: true,
@@ -77,7 +78,7 @@ const perform = async (z, bundle) => {
 
 module.exports = {
   key: "new_tagged_file",
-  noun: "New Tagged File",
+  noun: "File",
   display: {
     label: "New Tagged File",
     description: "Triggers when a specific tag is assigned to a file.",
