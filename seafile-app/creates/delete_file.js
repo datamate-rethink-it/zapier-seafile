@@ -26,7 +26,7 @@ module.exports = {
 
   display: {
     label: "Delete File",
-    description: "Creates a new text file from plain text content you specify.",
+    description: "Deletes a file you specify.",
   },
 
   operation: {

@@ -9,7 +9,7 @@ const perform = async (z, bundle) => {
 
   // relative path and replace
   const relative_path = bundle.inputData.path.replace(/^\/|\/$/g, "");
-  const replace = bundle.inputData.overwrite === 'yes' ? 1 : 0;
+  const replace = bundle.inputData.overwrite === "yes" ? 1 : 0;
 
   // generate upload-link
   const response = await z.request({

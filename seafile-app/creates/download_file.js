@@ -15,7 +15,7 @@ const perform = async (z, bundle) => {
     json: true,
   });
 
-  if (bundle.inputData.link_only === 'yes') {
+  if (bundle.inputData.link_only === "yes") {
     return {
       download_link: response.data,
     };
@@ -36,7 +36,7 @@ module.exports = {
 
   display: {
     label: "Download File",
-    description: "Download a file from Seafile.",
+    description: "Downloads a file from Seafile.",
   },
 
   operation: {

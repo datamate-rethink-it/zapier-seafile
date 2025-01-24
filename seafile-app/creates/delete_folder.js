@@ -36,7 +36,7 @@ module.exports = {
 
   display: {
     label: "Delete Folder",
-    description: "Delete a new folder in a library and move it to trash.",
+    description: "Deletes a folder in a library and move it to trash.",
   },
 
   operation: {
